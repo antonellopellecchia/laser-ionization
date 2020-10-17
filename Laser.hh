@@ -20,21 +20,22 @@ public:
   void SetWaistRadius(double waistRadius) {this->waistRadius=waistRadius;}
   void SetPulseEnergy(double pulseEnergy) {this->pulseEnergy=pulseEnergy;}
   void SetWaistPosition(double x, double y, double z);
-  void SetBoundaries(double x, double y, double z);
+  void SetBeamDirection(double dx, double dy, double dz);
+  void SetGasVolume(double x1, double y1, double z1, double x2, double y2, double z2);
 
   // getter methods
   double GetWavelength() {return this->wavelength;}
   double GetPulseEnergy() {return this->pulseEnergy;}
   double GetWaistRadius() {return this->waistRadius;}
-  double GetRayleighRange() {return pi*pow(waistRadius,2)/wavelength;}
+  double GetRayleighRange();
 
   double Pulse();
+  int PulseMC();
   void GetPrimaryElectron(double &x, double &y, double &z);
 
   void SetDebugging(bool debugging) {this->debugging=debugging;}
     
 private:
-  void UpdateRayleighRange()
   poisson_distribution<int> poisson;
   default_random_engine poissonGenerator;
 
@@ -43,8 +44,9 @@ private:
   double waistRadius;
   double directionX, directionY, directionZ;
   double waistX, waistY, waistZ;
-  double sizeX, sizeY, sizeZ;
-  
+  double gasX1, gasY1, gasZ1;
+  double gasX2, gasY2, gasZ2;
+
   double maxIonizationDensity = 0.;
   
   const double pi = atan(1)*4;
