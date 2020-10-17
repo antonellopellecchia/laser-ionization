@@ -3,16 +3,21 @@
 using namespace std;
 
 int main(int argc, char * argv[]) {
-  Laser *laser = new Laser();
-  laser->SetWavelength(266e-9);
-  laser->SetWaistRadius(1500e-6);
-  laser->SetDirection(1., 0., 0.);
-  laser->SetWaistPosition(0., 0., 0.02);
-  laser->SetBoundaries(5e-2, 5e-2, 4e-2); // units in m
+  double sizeX = 10e-2;
+  double sizeY = 10e-2;
+  double sizeZ = 5e-3;
+
+  double laserWavelength = 266e-9;
+  double laserWaistRadius = 25e-6;
+
+  Laser *laser = new Laser(laserWavelength, laserWaistRadius);
+  laser->SetBeamDirection(1., 0., 0.);
+  laser->SetWaistPosition(0., 0., 0.);
+  laser->SetGasVolume(-0.5*sizeX, -0.5*sizeY, -0.5*sizeZ, +0.5*sizeX, +0.5*sizeY, +0.5*sizeZ);
   laser->SetPulseEnergy(51e-6);
   laser->SetDebugging(true);
 
-  int nprimaries = laser->Pulse();
+  double nprimaries = laser->PulseMC();
 
   cout << nprimaries << endl;
 }
