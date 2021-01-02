@@ -70,18 +70,18 @@ CMakeFiles/gem.dir/gem.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/gem.dir/gem.cc.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/anto/Documents/Dottorato/simulations/optics/laser-ionization/examples/gem/gem.cc -o CMakeFiles/gem.dir/gem.cc.s
 
-CMakeFiles/gem.dir/home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Function.cc.o: CMakeFiles/gem.dir/flags.make
-CMakeFiles/gem.dir/home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Function.cc.o: /home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Function.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/anto/Documents/Dottorato/simulations/optics/laser-ionization/examples/gem/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/gem.dir/home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Function.cc.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gem.dir/home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Function.cc.o -c /home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Function.cc
+CMakeFiles/gem.dir/home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/IntegrableFunction.cc.o: CMakeFiles/gem.dir/flags.make
+CMakeFiles/gem.dir/home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/IntegrableFunction.cc.o: /home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/IntegrableFunction.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/anto/Documents/Dottorato/simulations/optics/laser-ionization/examples/gem/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/gem.dir/home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/IntegrableFunction.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gem.dir/home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/IntegrableFunction.cc.o -c /home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/IntegrableFunction.cc
 
-CMakeFiles/gem.dir/home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Function.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/gem.dir/home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Function.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Function.cc > CMakeFiles/gem.dir/home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Function.cc.i
+CMakeFiles/gem.dir/home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/IntegrableFunction.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/gem.dir/home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/IntegrableFunction.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/IntegrableFunction.cc > CMakeFiles/gem.dir/home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/IntegrableFunction.cc.i
 
-CMakeFiles/gem.dir/home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Function.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/gem.dir/home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Function.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Function.cc -o CMakeFiles/gem.dir/home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Function.cc.s
+CMakeFiles/gem.dir/home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/IntegrableFunction.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/gem.dir/home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/IntegrableFunction.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/IntegrableFunction.cc -o CMakeFiles/gem.dir/home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/IntegrableFunction.cc.s
 
 CMakeFiles/gem.dir/home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Laser.cc.o: CMakeFiles/gem.dir/flags.make
 CMakeFiles/gem.dir/home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Laser.cc.o: /home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Laser.cc
@@ -99,14 +99,14 @@ CMakeFiles/gem.dir/home/anto/Documents/Dottorato/simulations/optics/laser-ioniza
 # Object files for target gem
 gem_OBJECTS = \
 "CMakeFiles/gem.dir/gem.cc.o" \
-"CMakeFiles/gem.dir/home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Function.cc.o" \
+"CMakeFiles/gem.dir/home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/IntegrableFunction.cc.o" \
 "CMakeFiles/gem.dir/home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Laser.cc.o"
 
 # External object files for target gem
 gem_EXTERNAL_OBJECTS =
 
 gem: CMakeFiles/gem.dir/gem.cc.o
-gem: CMakeFiles/gem.dir/home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Function.cc.o
+gem: CMakeFiles/gem.dir/home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/IntegrableFunction.cc.o
 gem: CMakeFiles/gem.dir/home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Laser.cc.o
 gem: CMakeFiles/gem.dir/build.make
 gem: /home/anto/Downloads/programmi/root/install/lib/libCore.so

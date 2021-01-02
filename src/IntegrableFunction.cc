@@ -3,25 +3,25 @@
 #include <iostream>
 #include <random>
 
-#include "Function.hh"
+#include "IntegrableFunction.hh"
 
 using namespace std;
 
-Function::Function(int dimension) {
+IntegrableFunction::IntegrableFunction(int dimension) {
   this->dimension = dimension;
 }
 
-Function::~Function() {}
+IntegrableFunction::~IntegrableFunction() {}
 
-void Function::SetExpression(std::function<double(double,double,double)> function) {
+void IntegrableFunction::SetExpression(std::function<double(double,double,double)> function) {
   this->functionLambda = function;
 }
 
-double Function::Evaluate(double x, double y, double z) {
+double IntegrableFunction::Evaluate(double x, double y, double z) {
   return this->functionLambda(x, y, z);
 }
 
-void Function::SetDomain(double x1, double y1, double z1, double x2, double y2, double z2) {
+void IntegrableFunction::SetDomain(double x1, double y1, double z1, double x2, double y2, double z2) {
   this->x1 = x1;
   this->x2 = x2;
   this->y1 = y1;
@@ -30,7 +30,7 @@ void Function::SetDomain(double x1, double y1, double z1, double x2, double y2, 
   this->z2 = z2;
 }
 
-double Function::IntegrateMonteCarlo(int nsamples) {
+double IntegrableFunction::IntegrateMonteCarlo(int nsamples) {
   double x, y, z;
   double averagePrimaryIonization = 0.;
   cout << "Calculating primary ionization...";

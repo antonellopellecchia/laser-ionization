@@ -5,7 +5,7 @@
 
 #include "Laser.hh"
 
-#include "Function.hh"
+#include "IntegrableFunction.hh"
 
 using namespace std;
 
@@ -54,7 +54,7 @@ double Laser::GetIonizationDensityAt(double x, double y, double z) {
 
 void Laser::Initialize() {
   // calculate average primary ionization by monte carlo integration
-  Function *ionizationDensity = new Function(3);
+  IntegrableFunction *ionizationDensity = new IntegrableFunction(3);
   ionizationDensity->SetDomain(gasX1, gasY1, gasZ1, gasX2, gasY2, gasZ2);
 
   double rayleighRange = this->GetRayleighRange();

@@ -150,32 +150,32 @@ gem.cc.s:
 	$(MAKE) -f CMakeFiles/gem.dir/build.make CMakeFiles/gem.dir/gem.cc.s
 .PHONY : gem.cc.s
 
-home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Function.o: home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Function.cc.o
+home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/IntegrableFunction.o: home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/IntegrableFunction.cc.o
 
-.PHONY : home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Function.o
+.PHONY : home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/IntegrableFunction.o
 
 # target to build an object file
-home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Function.cc.o:
-	$(MAKE) -f CMakeFiles/gem.dir/build.make CMakeFiles/gem.dir/home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Function.cc.o
-.PHONY : home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Function.cc.o
+home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/IntegrableFunction.cc.o:
+	$(MAKE) -f CMakeFiles/gem.dir/build.make CMakeFiles/gem.dir/home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/IntegrableFunction.cc.o
+.PHONY : home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/IntegrableFunction.cc.o
 
-home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Function.i: home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Function.cc.i
+home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/IntegrableFunction.i: home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/IntegrableFunction.cc.i
 
-.PHONY : home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Function.i
+.PHONY : home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/IntegrableFunction.i
 
 # target to preprocess a source file
-home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Function.cc.i:
-	$(MAKE) -f CMakeFiles/gem.dir/build.make CMakeFiles/gem.dir/home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Function.cc.i
-.PHONY : home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Function.cc.i
+home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/IntegrableFunction.cc.i:
+	$(MAKE) -f CMakeFiles/gem.dir/build.make CMakeFiles/gem.dir/home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/IntegrableFunction.cc.i
+.PHONY : home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/IntegrableFunction.cc.i
 
-home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Function.s: home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Function.cc.s
+home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/IntegrableFunction.s: home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/IntegrableFunction.cc.s
 
-.PHONY : home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Function.s
+.PHONY : home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/IntegrableFunction.s
 
 # target to generate assembly for a file
-home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Function.cc.s:
-	$(MAKE) -f CMakeFiles/gem.dir/build.make CMakeFiles/gem.dir/home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Function.cc.s
-.PHONY : home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Function.cc.s
+home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/IntegrableFunction.cc.s:
+	$(MAKE) -f CMakeFiles/gem.dir/build.make CMakeFiles/gem.dir/home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/IntegrableFunction.cc.s
+.PHONY : home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/IntegrableFunction.cc.s
 
 home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Laser.o: home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Laser.cc.o
 
@@ -216,9 +216,9 @@ help:
 	@echo "... gem.o"
 	@echo "... gem.i"
 	@echo "... gem.s"
-	@echo "... home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Function.o"
-	@echo "... home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Function.i"
-	@echo "... home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Function.s"
+	@echo "... home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/IntegrableFunction.o"
+	@echo "... home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/IntegrableFunction.i"
+	@echo "... home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/IntegrableFunction.s"
 	@echo "... home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Laser.o"
 	@echo "... home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Laser.i"
 	@echo "... home/anto/Documents/Dottorato/simulations/optics/laser-ionization/src/Laser.s"

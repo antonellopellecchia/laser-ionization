@@ -6,12 +6,12 @@
 
 using namespace std;
 
-class Function;
+class IntegrableFunction;
 
-class Function {
+class IntegrableFunction {
 public:
-  Function(int dimension);
-  virtual ~Function();
+  IntegrableFunction(int dimension);
+  virtual ~IntegrableFunction();
 
   void SetExpression(std::function<double(double,double,double)>);
   void SetDomain(double, double, double, double, double, double);
