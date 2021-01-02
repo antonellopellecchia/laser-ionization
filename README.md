@@ -56,3 +56,15 @@ Sampling from this distribution gives the position of each electron created, whi
     ```
     
 # Examples
+
+- The `basic` example is meant for test in a minimal environment and has no particular dependencies; it calls the `Pulse()` function many times and prints the Poisson-distributed number of electrons created by each pulse.
+
+- The `gem` example couples the library with Garfield++ to simulate the avalanche of electrons created by the laser beam. Its dependencies are Garfield++ and ROOT. In the `build/plots` directory one can find output plots, such as the electron drift lines and the distribution of the primary electrons as calculated witht the methods described above. As expected, the position of the primary electrons follows a gaussian distribution on the `y-z` directions.
+
+The examples can be built with `cmake` by moving to the corresponding directory and using:
+
+    ```
+    mkdir build && cd build
+    cmake ..
+    make
+    ```
