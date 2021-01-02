@@ -7,8 +7,10 @@
 
 using namespace std;
 
-IntegrableFunction::IntegrableFunction(int dimension) {
-  this->dimension = dimension;
+IntegrableFunction::IntegrableFunction() {
+  this->randomGenerator = default_random_engine();
+  this->uniformDistribution = uniform_real_distribution<double>(0., 1.);
+  this->ymax = 0., this->ymin = 0.;
 }
 
 IntegrableFunction::~IntegrableFunction() {}
@@ -28,6 +30,25 @@ void IntegrableFunction::SetDomain(double x1, double y1, double z1, double x2, d
   this->y2 = y2;
   this->z1 = z1;
   this->z2 = z2;
+}
+
+void IntegrableFunction::SetCodomain(double min, double max) {
+  // needed for rejection sampling
+  this->ymin = min;
+  this->ymax = max;
+}
+
+void IntegrableFunction::SamplePoint(double &x, double &y, double &z) {
+  // sample point according to distribution
+  // by rejection sampling
+  double sampledY = 0., calculatedY = 0.;
+  do {
+    x = this->x1 + this->uniformDistribution(randomGenerator) * (this->x2-this->x1);
+    y = this->y1 + this->uniformDistribution(randomGenerator) * (this->y2-this->y1);
+    z = this->z1 + this->uniformDistribution(randomGenerator) * (this->z2-this->z1);
+    sampledY = this->ymin + this->uniformDistribution(randomGenerator)*this->ymax;
+    calculatedY = this->Evaluate(x, y, z);
+  } while (calculatedY<sampledY);
 }
 
 double IntegrableFunction::IntegrateMonteCarlo(int nsamples) {

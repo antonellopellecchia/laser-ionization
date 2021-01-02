@@ -3,6 +3,8 @@
 #include <iostream>
 #include <random>
 
+#include "IntegrableFunction.hh"
+
 using namespace std;
 
 class Laser;
@@ -36,6 +38,7 @@ public:
   void SetDebugging(bool debugging) {this->debugging=debugging;}
     
 private:
+  IntegrableFunction *ionizationDensity;
   poisson_distribution<int> poissonDistribution;
   default_random_engine randomGenerator;
 
@@ -47,10 +50,8 @@ private:
   double gasX1, gasY1, gasZ1;
   double gasX2, gasY2, gasZ2;
 
-  double maxIonizationDensity = 0.;
-  
   const double pi = atan(1)*4;
-  const double ionizationRateConstant = 2948437307.082676;
+  const double ionizationRateCrossSection = 2948437307.082676;
   const double beamQuality = 1.5;
 
   double rayleighRange;
