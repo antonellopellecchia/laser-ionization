@@ -72,10 +72,10 @@ int main(int argc, char * argv[]) {
   double laserWaistRadius = 25e-6;
   Laser *laser = new Laser(laserWavelength, laserWaistRadius);
   laser->SetBeamDirection(1., 0., 0.);
-  laser->SetWaistPosition(0., 0., 250e-6);
+  laser->SetWaistPosition(0., 0., 200e-6);
   const double sizeXY = 400e-6, sizeZ = 200e-6, centerZ = 200e-6; // restrict to 200x200x200 um^3 gas volume
   laser->SetGasVolume(-0.5*sizeXY, -0.5*sizeXY, centerZ-0.5*sizeZ, +0.5*sizeXY, +0.5*sizeXY, centerZ+0.5*sizeZ);
-  laser->SetPulseEnergy(51e-8);
+  laser->SetPulseEnergy(20e-7);
   laser->SetDebugging(true);
   laser->Initialize();
 
@@ -90,22 +90,36 @@ int main(int argc, char * argv[]) {
   ViewDrift *driftView = new ViewDrift();
   aval->EnablePlotting(driftView);
 
+  TH1F *primaryHistoX = new TH1F("PrimaryX", ";x position [cm];", 50, -0.03, 0.03);
+  TH1F *primaryHistoZ = new TH1F("PrimaryZ", ";z position [cm];", 60, 0.01, 0.04);
+
   int nprimaries = laser->Pulse();
   double x0 = 0., y0 = 0., z0 = 0.;
   double dx0 = 0., dy0 = 0., dz0 = 0., e0=0.1, t0=0.;
   int nTotalElectrons = 0;
   cout << endl;
   for (int nelectron=0; nelectron<nprimaries; nelectron++) {
-    laser->GetPrimaryElectron(x0, y0, z0);
+    laser->GetPrimaryElectron(x0, y0, z0); // retrieve position of nth primary electron
     x0*=1e2, y0*=1e2, z0 *= 1e2; // Garfield uses cm as unit
-    aval->AvalancheElectron(x0, y0, z0, t0, e0, dx0, dy0, dz0);
-    unsigned int nAvalancheElectrons = aval->GetNumberOfElectronEndpoints();
+    primaryHistoX->Fill(x0); primaryHistoZ->Fill(z0); // fill x and z histograms
+    aval->AvalancheElectron(x0, y0, z0, t0, e0, dx0, dy0, dz0); // calculate drift and avalanche for primary electron
+    unsigned int nAvalancheElectrons = aval->GetNumberOfElectronEndpoints(); // calculate number of electrons after avalanche
     nTotalElectrons += nAvalancheElectrons;
-    cout << "\rElectron " << nelectron << "/" << nprimaries << ", (" << x0 << "," << y0 << "," << z0 << ")";
+    cout << "\rElectron " << nelectron << "/" << nprimaries << ", (" << x0 << "," << y0 << "," << z0 << ")           ";
   }
   cout << endl;
   cout << nprimaries << " primary electrons " << endl;
   cout << nTotalElectrons << " total electrons " << endl;
+
+
+  /* plot x and y distributions of primary electrons */
+  TCanvas *primaryPositionCanvas = new TCanvas("PrimaryPositionCanvas", "", 1800, 800);
+  primaryPositionCanvas->Divide(2, 1);
+  primaryPositionCanvas->cd(1);
+  primaryHistoX->Draw();
+  primaryPositionCanvas->cd(2);
+  primaryHistoZ->Draw();
+  primaryPositionCanvas->SaveAs("plots/primaries.eps");
 
 
   /* plot drift lines */
