@@ -51,8 +51,8 @@ double Laser::GetIonizationDensityAt(double x, double y, double z) {
 
 void Laser::Initialize() {
   // calculate average primary ionization by monte carlo integration
-  this->ionizationDensity = new IntegrableFunction();
-  this->ionizationDensity->SetDomain(gasX1, gasY1, gasZ1, gasX2, gasY2, gasZ2);
+  this->ionizationDensity = IntegrableFunction();
+  this->ionizationDensity.SetDomain(gasX1, gasY1, gasZ1, gasX2, gasY2, gasZ2);
 
   double rayleighRange = this->GetRayleighRange();
   auto ionizationDensityLambda = [=](double x, double y, double z) {
@@ -61,11 +61,11 @@ void Laser::Initialize() {
     double beamIntensity = 2*pulseEnergy/(pi*pow(waistRadius,2))*pow(waistRadius/beamRadius,2)*exp(-2*pow(r/beamRadius,2));
     return ionizationRateCrossSection*pow(beamIntensity,2);
   };
-  this->ionizationDensity->SetExpression(ionizationDensityLambda);
+  this->ionizationDensity.SetExpression(ionizationDensityLambda);
 
   int nsamples = 100000;
-  this->averagePrimaryIonization = (int) this->ionizationDensity->IntegrateMonteCarlo(nsamples);
-  this->ionizationDensity->SetCodomain(0., ionizationDensityLambda(waistX, waistY, waistZ));
+  this->averagePrimaryIonization = (int) this->ionizationDensity.IntegrateMonteCarlo(nsamples);
+  this->ionizationDensity.SetCodomain(0., ionizationDensityLambda(waistX, waistY, waistZ));
 
   // create random poisson variable
   // with average value just calculated
@@ -82,5 +82,5 @@ int Laser::Pulse() {
 void Laser::GetPrimaryElectron(double &x, double &y, double &z) {
   // sample primary electron position
   // from ionization density function
-  this->ionizationDensity->SamplePoint(x, y, z);
+  this->ionizationDensity.SamplePoint(x, y, z);
 }

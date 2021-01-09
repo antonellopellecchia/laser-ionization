@@ -38,7 +38,7 @@ public:
   void SetDebugging(bool debugging) {this->debugging=debugging;}
     
 private:
-  IntegrableFunction *ionizationDensity;
+  IntegrableFunction ionizationDensity;
   poisson_distribution<int> poissonDistribution;
   default_random_engine randomGenerator;
 

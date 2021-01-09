@@ -23,7 +23,7 @@ public:
     
 private:
   double x1, y1, z1, x2, y2, z2;
-  double ymin, ymax;
+  double ymin=0, ymax=0;
   std::function<double(double,double,double)> functionLambda;
 
   uniform_real_distribution<double> uniformDistribution;

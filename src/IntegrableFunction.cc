@@ -5,12 +5,10 @@
 
 #include "IntegrableFunction.hh"
 
-using namespace std;
 
 IntegrableFunction::IntegrableFunction() {
   this->randomGenerator = default_random_engine();
   this->uniformDistribution = uniform_real_distribution<double>(0., 1.);
-  this->ymax = 0., this->ymin = 0.;
 }
 
 IntegrableFunction::~IntegrableFunction() {}
