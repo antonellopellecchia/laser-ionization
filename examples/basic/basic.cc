@@ -1,6 +1,5 @@
 #include "Laser.hh"
 
-using namespace std;
 
 int main(int argc, char * argv[]) {
   double sizeX = 10e-2;
@@ -21,7 +20,7 @@ int main(int argc, char * argv[]) {
   double nprimaries;
   for (int i=0; i<100; i++) {
     nprimaries = laser.Pulse();
-    cout << nprimaries << " ";
+    std::cout << nprimaries << " ";
   }
-  cout << endl;
+  std::cout << std::endl;
 }

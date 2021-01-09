@@ -5,10 +5,9 @@
 
 #include "IntegrableFunction.hh"
 
-
 IntegrableFunction::IntegrableFunction() {
-  this->randomGenerator = default_random_engine();
-  this->uniformDistribution = uniform_real_distribution<double>(0., 1.);
+  this->randomGenerator = std::default_random_engine();
+  this->uniformDistribution = std::uniform_real_distribution<double>(0., 1.);
 }
 
 IntegrableFunction::~IntegrableFunction() {}
@@ -52,15 +51,15 @@ void IntegrableFunction::SamplePoint(double &x, double &y, double &z) {
 double IntegrableFunction::IntegrateMonteCarlo(int nsamples) {
   double x, y, z;
   double averagePrimaryIonization = 0.;
-  cout << "Calculating primary ionization...";
+  std::cout << "Calculating primary ionization...";
   for (int i=0; i<nsamples; i++) {
     x = this->x1 + ((double)rand())/RAND_MAX * (this->x2 - this->x1);
     y = this->y1 + ((double)rand())/RAND_MAX * (this->y2 - this->y1);
     z = this->z1 + ((double)rand())/RAND_MAX * (this->z2 - this->z1);
     averagePrimaryIonization += this->Evaluate(x, y, z);
-    cout << "\rCalculating primary ionization... " << (float)i/nsamples*100 << "%";
+    std::cout << "\rCalculating primary ionization... " << (float)i/nsamples*100 << "%";
   }
-  cout << "\rCalculating primary ionization....... Done" << endl;
+  std::cout << "\rCalculating primary ionization....... Done" << std::endl;
 
   averagePrimaryIonization /= nsamples;
   averagePrimaryIonization *= (this->x2-this->x1)*(this->y2-this->y1)*(this->z2-this->z1);

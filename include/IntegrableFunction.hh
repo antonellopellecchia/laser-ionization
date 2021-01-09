@@ -4,8 +4,6 @@
 #include <random>
 #include <functional>
 
-using namespace std;
-
 class IntegrableFunction;
 
 class IntegrableFunction {
@@ -26,6 +24,6 @@ private:
   double ymin=0, ymax=0;
   std::function<double(double,double,double)> functionLambda;
 
-  uniform_real_distribution<double> uniformDistribution;
-  default_random_engine randomGenerator;
+  std::uniform_real_distribution<double> uniformDistribution;
+  std::default_random_engine randomGenerator;
 };

@@ -5,8 +5,6 @@
 
 #include "IntegrableFunction.hh"
 
-using namespace std;
-
 class Laser;
 
 class Laser {
@@ -39,8 +37,8 @@ public:
     
 private:
   IntegrableFunction ionizationDensity;
-  poisson_distribution<int> poissonDistribution;
-  default_random_engine randomGenerator;
+  std::poisson_distribution<int> poissonDistribution;
+  std::default_random_engine randomGenerator;
 
   double wavelength;
   double pulseEnergy;

@@ -5,8 +5,6 @@
 
 #include "Laser.hh"
 
-using namespace std;
-
 Laser::Laser(double wavelength, double waistRadius) {
   this->wavelength = wavelength;
   this->waistRadius = waistRadius;
@@ -69,8 +67,8 @@ void Laser::Initialize() {
 
   // create random poisson variable
   // with average value just calculated
-  this->randomGenerator = default_random_engine();
-  this->poissonDistribution = poisson_distribution<int>(averagePrimaryIonization);
+  this->randomGenerator = std::default_random_engine();
+  this->poissonDistribution = std::poisson_distribution<int>(averagePrimaryIonization);
 }
 
 int Laser::Pulse() {
