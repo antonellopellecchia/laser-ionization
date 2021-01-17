@@ -33,22 +33,18 @@ Sampling from this distribution gives the position of each electron created, whi
 1. Create a `Laser` object (passing to it the wavelength and waist size) and set volume boundaries, beam waist position and pulse energy:
 
     ```
-    Laser *laser = new Laser(laserWavelength, laserWaistRadius);
-    laser->SetWaistPosition(0., 0., 0.);
-    laser->SetGasVolume(-0.5*sizeX, -0.5*sizeY, -0.5*sizeZ, +0.5*sizeX, +0.5*sizeY, +0.5*sizeZ);
-    laser->SetPulseEnergy(51e-8);
-    laser->SetDebugging(true);
-    laser->Initialize();
+    Laser laser{laserWavelength, laserPulseEnergy, laserWaistRadius, laserWaistPosition};
+    laser.SetGasVolume(point2, point2);
     ```
     
 2. Call `Pulse()` to calculate the number of primary electrons. This is done by integrating the ionization density function, creating a Poisson distribution with average equal to the result of the integration and sampling from such Poisson distribution.
-    ``` int nprimaries = laser->Pulse(); ```
+    ``` int nprimaries = laser.Pulse(); ```
 
 3. Call `GetPrimaryElectron()` to obtain the position of each electron created by the pulse. This is obtained by performing a rejection sampling from the ionization density distribution:
     ```
-      double x0, y0, z0;
+      Point3D electronPosition;
       for (int i=0; i<nprimaries; i++) {
-        laser->GetPrimaryElectron(x0, y0, z0);
+        electronPosition = laser->GetPrimaryElectron();
         // ...
         // do stuff with the position, e.g. track electron drift or avalanche
         // ...

@@ -3,58 +3,54 @@
 #include <iostream>
 #include <random>
 
-#include "IntegrableFunction.hh"
+#ifndef LASER_DEFINITION
+#define LASER_DEFINITION
 
-class Laser;
+#include "IntegrableFunction.hh"
+#include "Point3D.hh"
 
 class Laser {
 public:
-  Laser(double wavelength, double waistRadius);
-  virtual ~Laser();
+  Laser(double wavelength, double pulseEnergy, double waistRadius, Point3D waistPosition);
 
-  double GetIonizationDensityAt(double r, double z);
-  double GetIonizationDensityAt(double x, double y, double z);
+  double GetIonizationDensityAt(Point3D) const;
   
-  // setter methods
-  void SetWavelength(double wavelength) {this->wavelength=wavelength;}
-  void SetWaistRadius(double waistRadius) {this->waistRadius=waistRadius;}
-  void SetPulseEnergy(double pulseEnergy) {this->pulseEnergy=pulseEnergy;}
-  void SetWaistPosition(double x, double y, double z);
-  void SetBeamDirection(double dx, double dy, double dz);
-  void SetGasVolume(double x1, double y1, double z1, double x2, double y2, double z2);
+  void SetWavelength(double wavelength);
+  void SetWaistRadius(double waistRadius);
+  void SetPulseEnergy(double pulseEnergy);
+  void SetWaistPosition(Point3D);
+  void SetGasVolume(Point3D, Point3D);
 
-  // getter methods
   double GetWavelength() {return this->wavelength;}
   double GetPulseEnergy() {return this->pulseEnergy;}
   double GetWaistRadius() {return this->waistRadius;}
-  double GetRayleighRange();
+  double GetRayleighRange() const;
 
-  void Initialize();
+  void CalculateAveragePrimaries();
   int Pulse();
-  void GetPrimaryElectron(double &x, double &y, double &z);
+  Point3D GetPrimaryElectron();
 
   void SetDebugging(bool debugging) {this->debugging=debugging;}
     
 private:
-  IntegrableFunction ionizationDensity;
+  IntegrableFunction<Laser> ionizationDensity;
   std::poisson_distribution<int> poissonDistribution;
   std::default_random_engine randomGenerator;
 
   double wavelength;
   double pulseEnergy;
   double waistRadius;
-  double directionX, directionY, directionZ;
-  double waistX, waistY, waistZ;
-  double gasX1, gasY1, gasZ1;
-  double gasX2, gasY2, gasZ2;
+  Point3D waistPosition;
+  Point3D gasVertex1;
+  Point3D gasVertex2;
 
   const double pi = atan(1)*4;
   const double ionizationRateCrossSection = 2948437307.082676;
   const double beamQuality = 1.5;
 
-  double rayleighRange;
-  
   int averagePrimaryIonization = -1;
 
   bool debugging = false;
 };
+
+#endif

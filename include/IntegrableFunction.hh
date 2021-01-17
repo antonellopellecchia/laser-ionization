@@ -4,26 +4,34 @@
 #include <random>
 #include <functional>
 
-class IntegrableFunction;
+#include "Point3D.hh"
 
-class IntegrableFunction {
+#ifndef INTEGRABLE_FUNCTION_DEFINITION
+#define INTEGRABLE_FUNCTION_DEFINITION
+
+template<class T> class IntegrableFunction {
 public:
-  IntegrableFunction();
-  virtual ~IntegrableFunction();
+  IntegrableFunction(bool verbose=false);
 
-  void SetExpression(std::function<double(double,double,double)>);
-  void SetDomain(double, double, double, double, double, double);
+  void SetExpression(T*, std::function<double(T&,Point3D)>);
+  void SetDomain(Point3D, Point3D);
   void SetCodomain(double, double);
 
-  double Evaluate(double, double, double);
-  void SamplePoint(double &, double &, double &);
+  double GetDomainVolume();
+  double Evaluate(Point3D);
+  Point3D SamplePoint();
   double IntegrateMonteCarlo(int);
     
 private:
-  double x1, y1, z1, x2, y2, z2;
+  bool verbose;
+
+  T *parameterObject; // holds function parameters
+  Point3D domain1, domain2;
   double ymin=0, ymax=0;
-  std::function<double(double,double,double)> functionLambda;
+  std::function<double(T&,Point3D)> functionExpression;
 
   std::uniform_real_distribution<double> uniformDistribution;
   std::default_random_engine randomGenerator;
 };
+
+#endif

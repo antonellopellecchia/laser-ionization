@@ -4,17 +4,17 @@
 
 Class to determine the number and position of primary electrons given specific laser parameters (pulse energy, waist radius, wavelength etc.).
 
-- `Laser(double wavelength, double waistRadius)` Constructor. Sets laser wavelength and waist radius.
+- `Laser(double wavelength, double pulseEnergy, double waistRadius, Point3D waistPosition)` Constructor. Sets laser wavelength and waist radius.
 
-- `void SetWavelength(double wavelength)`, `void SetWaistRadius(double waistRadius)`, `void SetPulseEnergy(double pulseEnergy)`, `void SetWaistPosition(double x, double y, double z)` Self-evident.
+- `void SetWavelength(double wavelength)`, `void SetWaistRadius(double waistRadius)`, `void SetPulseEnergy(double pulseEnergy)`, `void SetWaistPosition(Point3D waistPosition)` Self-evident.
 
-- `void SetGasVolume(double x1, double y1, double z1, double x2, double y2, double z2)` Set limits for the primary ionization function to be later integrated.
+- `void SetGasVolume(Point3D p1, Point3D p2)` Set limits for the primary ionization function to be later integrated.
 
-- `void Initialize()` Define the laser-induced ionization density as an `IntegrableFunction`, calculate the average number of electrons created by a single pulse through Monte Carlo integration and define a Poisson random variable with average equal to the number just calculated.
+- `void CalculateAveragePrimaries()` Calculate the average number of electrons created by a single pulse through Monte Carlo integration and define a Poisson random variable with average equal to the number just calculated.
 
-- `int Pulse()` Call `Initialize` if it has not yet been called, then return number sampled from Poisson distribution.
+- `int Pulse()` Call `CalculateAveragePrimaries` if it has not yet been called, then return number sampled from Poisson distribution.
 
-- `void GetPrimaryElectron(double &x, double &y, double &z)` Sample point in the gas volume from the ionization density function.
+- `Point3D GetPrimaryElectron()` Sample point in the gas volume from the ionization density function.
 
 ## `IntegrableFunction`
 
@@ -22,14 +22,14 @@ Describes a real-valued function in 3D space that can be integrated and from whi
 
 - `IntegrableFunction()` Constructor, creates a uniform distribution needed later for sampling in 3D space.
 
-- `void IntegrableFunction::SetExpression(std::function<double(double,double,double)> function)` Assigns a lambda function to the `functionLambda` private variable.
+- `void IntegrableFunction::SetExpression(std::function<double(T&,Point3D)> function)` Assigns a function to the `functionExpression` private variable.
 
-- `void SetDomain(double x1, double y1, double z1, double x2, double y2, double z2)` Set function range in 3D space, needed for Monte Carlo integration.
+- `void SetDomain(Point3D p1, Point3D p2)` Set function range in 3D space, needed for Monte Carlo integration.
 
 - `void SetCodomain(double min, double max)` Set maximum and minimum function values, required for rejection sampling.
 
-- `double Evaluate(double x, double y, double z)` Return the value of the lambda function `functionLambda` calculated at `(x, y, z)`.
+- `double Evaluate(Point3D p)` Return the value of the lambda function `functionExpression` calculated at `p`.
 
-- `void SamplePoint(double &x, double &y, double &z)` Set the values of `x`, `y` and `z` to values sampled from `functionLambda` through rejection sampling.
+- `Point3D SamplePoint()` Returns position sampled from `functionExpression` through rejection sampling.
 
-- `double IntegrateMonteCarlo(int nsamples)` Integrate the function `functionLambda` over the previously specified domain with number of Monte Carlo samples equal to `nsamples`.
+- `double IntegrateMonteCarlo(int nsamples)` Integrate the function `functionExpression` over the previously specified domain with number of Monte Carlo samples equal to `nsamples`.

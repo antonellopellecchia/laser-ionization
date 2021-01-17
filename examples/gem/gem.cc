@@ -24,6 +24,7 @@
 #include "Garfield/Plotting.hh"
 
 #include "Laser.hh"
+#include "Point3D.hh"
 
 using namespace Garfield;
 
@@ -68,15 +69,12 @@ int main(int argc, char * argv[]) {
 
   /* laser setup */
   double laserWavelength = 266e-9;
+  double laserPulseEnergy = 1e-6;
   double laserWaistRadius = 25e-6;
-  Laser laser{laserWavelength, laserWaistRadius};
-  laser.SetBeamDirection(1., 0., 0.);
-  laser.SetWaistPosition(0., 0., 200e-6);
+  Laser laser{laserWavelength, laserPulseEnergy, laserWaistRadius, Point3D(0., 0., 200e-6)};
   const double sizeXY = 400e-6, sizeZ = 200e-6, centerZ = 200e-6; // restrict to 200x200x200 um^3 gas volume
-  laser.SetGasVolume(-0.5*sizeXY, -0.5*sizeXY, centerZ-0.5*sizeZ, +0.5*sizeXY, +0.5*sizeXY, centerZ+0.5*sizeZ);
-  laser.SetPulseEnergy(10e-7);
-  laser.SetDebugging(true);
-  laser.Initialize();
+  Point3D gasVolume1{-0.5*sizeXY, -0.5*sizeXY, centerZ-0.5*sizeZ}, gasVolume2{+0.5*sizeXY, +0.5*sizeXY, centerZ+0.5*sizeZ};
+  laser.SetGasVolume(gasVolume1, gasVolume2);
 
   /* inizialize sensor object, useful for drift lines visualization */
   Sensor sensor;
@@ -93,18 +91,22 @@ int main(int argc, char * argv[]) {
   TH1F primaryHistoZ{"PrimaryZ", ";z position [cm];", 60, 0.01, 0.04};
 
   int nprimaries = laser.Pulse();
-  double x0 = 0., y0 = 0., z0 = 0.;
+  //double x0 = 0., y0 = 0., z0 = 0.;
   double dx0 = 0., dy0 = 0., dz0 = 0., e0=0.1, t0=0.;
   int nTotalElectrons = 0;
   std::cout << std::endl;
+  Point3D electronPosition;
   for (int nelectron=0; nelectron<nprimaries; nelectron++) {
-    laser.GetPrimaryElectron(x0, y0, z0); // retrieve position of nth primary electron
-    x0*=1e2, y0*=1e2, z0 *= 1e2; // Garfield uses cm as unit
-    primaryHistoX.Fill(x0); primaryHistoZ.Fill(z0); // fill x and z histograms
-    aval.AvalancheElectron(x0, y0, z0, t0, e0, dx0, dy0, dz0); // calculate drift and avalanche for primary electron
+    electronPosition = laser.GetPrimaryElectron(); // retrieve position of nth primary electron
+    //electronPosition.x*=1e2, electronPosition.y*=1e2, electronPosition.z*=1e2; // Garfield uses cm as unit
+    electronPosition*=1e2; // Garfield uses cm as unit
+    primaryHistoX.Fill(electronPosition.x); primaryHistoZ.Fill(electronPosition.z); // fill x and z histograms
+    aval.AvalancheElectron(electronPosition.x, electronPosition.y, electronPosition.z, t0, e0, dx0, dy0, dz0); // calculate drift and avalanche for primary electron
     unsigned int nAvalancheElectrons = aval.GetNumberOfElectronEndpoints(); // calculate number of electrons after avalanche
     nTotalElectrons += nAvalancheElectrons;
-    std::cout << "\rElectron " << nelectron << "/" << nprimaries << ", (" << x0 << "," << y0 << "," << z0 << ")           ";
+    std::cout << "\rElectron " << nelectron << "/" << nprimaries << ", (";
+    std::cout << electronPosition.x << "," << electronPosition.y << "," << electronPosition.z;
+    std::cout << ")           ";
   }
   std::cout << std::endl;
   std::cout << nprimaries << " primary electrons " << std::endl;
