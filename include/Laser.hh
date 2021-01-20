@@ -33,9 +33,16 @@ public:
   void SetDebugging(bool debugging) {this->debugging=debugging;}
     
 private:
+  const double pi{atan(1)*4};
+  const double ionizationRateCrossSection{2948437307.082676};
+  const double beamQuality{1.5};
+
   IntegrableFunction<Laser> ionizationDensity;
   std::poisson_distribution<int> poissonDistribution;
   std::default_random_engine randomGenerator;
+
+  int averagePrimaryIonization{-1};
+  bool forcePrimaryCalculation{true};
 
   double wavelength;
   double pulseEnergy;
@@ -43,12 +50,6 @@ private:
   Point3D waistPosition;
   Point3D gasVertex1;
   Point3D gasVertex2;
-
-  const double pi = atan(1)*4;
-  const double ionizationRateCrossSection = 2948437307.082676;
-  const double beamQuality = 1.5;
-
-  int averagePrimaryIonization = -1;
 
   bool debugging = false;
 };

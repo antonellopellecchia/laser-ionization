@@ -12,34 +12,33 @@ Laser::Laser(double wavelength, double pulseEnergy, double waistRadius, Point3D 
   this->waistPosition = waistPosition;
   this->ionizationDensity.SetExpression(this, &Laser::GetIonizationDensityAt);
   this->ionizationDensity.SetCodomain(0., GetIonizationDensityAt(waistPosition));
-  CalculateAveragePrimaries();
 }
 
 void Laser::SetWaistPosition(Point3D waistPosition) {
   this->waistPosition = waistPosition;
-  CalculateAveragePrimaries();
+  forcePrimaryCalculation = true;
 }
 
 void Laser::SetGasVolume(Point3D vertex1, Point3D vertex2) {
   gasVertex1 = vertex1;
   gasVertex2 = vertex2;
   this->ionizationDensity.SetDomain(gasVertex1, gasVertex2);
-  CalculateAveragePrimaries();
+  forcePrimaryCalculation = true;
 }
 
 void Laser::SetWavelength(double wavelength) {
   this->wavelength=wavelength;
-  CalculateAveragePrimaries();
+  forcePrimaryCalculation = true;
 }
 
 void Laser::SetWaistRadius(double waistRadius) {
   this->waistRadius=waistRadius;
-  CalculateAveragePrimaries();
+  forcePrimaryCalculation = true;
 }
 
 void Laser::SetPulseEnergy(double pulseEnergy) {
   this->pulseEnergy=pulseEnergy;
-  CalculateAveragePrimaries();
+  forcePrimaryCalculation = true;
 }
 
 double Laser::GetRayleighRange() const {
@@ -62,11 +61,12 @@ void Laser::CalculateAveragePrimaries() {
   // with average value just calculated
   this->randomGenerator = std::default_random_engine();
   this->poissonDistribution = std::poisson_distribution<int>(averagePrimaryIonization);
+  forcePrimaryCalculation = false;
 }
 
 int Laser::Pulse() {
   // sample from Poisson distribution with average calculated in Initialize()
-  if (this->averagePrimaryIonization<0) CalculateAveragePrimaries();
+  if (forcePrimaryCalculation) CalculateAveragePrimaries();
   return poissonDistribution(randomGenerator);
 }
 
